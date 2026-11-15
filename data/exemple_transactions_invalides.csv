@@ -1,0 +1,8 @@
+date,type,montant,categorie,description
+2026-10-01,revenu,2200.00,Salaire,Ligne valide
+2026-10-02,depense,-50.00,Alimentation,Montant négatif
+2026-10-03,depense,abc,Transport,Montant non numérique
+2026-13-05,depense,10.00,Loisirs,Date impossible
+2026-10-06,virement,10.00,Loisirs,Type inconnu
+2026-10-07,depense,15.00,,Catégorie vide
+2026-10-08,depense,30.00,Alimentation,Ligne valide

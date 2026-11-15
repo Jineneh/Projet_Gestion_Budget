@@ -1,0 +1,4 @@
+# Dépendances de développement (l'application elle-même n'utilise que la bibliothèque standard)
+pytest>=8.0
+pytest-cov>=5.0
+ruff>=0.5

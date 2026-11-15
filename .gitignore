@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+# Tests et couverture
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+# Éditeurs et OS
+.vscode/
+.idea/
+.DS_Store
+# Données personnelles générées par l'application
+data/*.json
+!data/exemple_*.json
+data/ma_*.csv
+# Scala
+scala_extension/target/
+scala_extension/.bsp/
+scala_extension/.scala-build/
