@@ -1,4 +1,4 @@
-# Version 1 « legacy »
+# Version 1 "legacy"
 
 Version volontairement perfectible (une classe `GestionnaireBudget` fourre-tout, un `if/elif`
 géant sur les alertes, validation dupliquée, nombres magiques). Elle est **figée** par des tests
