@@ -5,7 +5,7 @@ description = "Application en ligne de commande de gestion de budget personnel"
 requires-python = ">=3.11"
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 testpaths = ["tests"]
 addopts = "-q"
 
