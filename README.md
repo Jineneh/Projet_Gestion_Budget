@@ -4,7 +4,7 @@ Application en ligne de commande (Python 3.11+) pour suivre revenus et dépenses
 plafonds mensuels par catégorie, être alerté avant dépassement et produire un rapport mensuel.
 Projet du cours *Programmation épurée* (Master 2) : POO et Clean Code.
 
-> **Statut** : étape 2, structure du dépôt en place. Le code arrive par étapes (voir la feuille de route).
+> > **Statut** : version propre en cours. Modèles, journal, alertes, suivi et rapports sont faits et testés ; persistance, CLI et application restent à faire.
 
 ## Documentation
 
@@ -52,8 +52,8 @@ Données de démonstration : `data/exemple_transactions.csv` (valide) et
 
 - [x] 1. Cadrage et conception
 - [x] 2. Structure du dépôt
-- [ ] 3. Version 1 legacy et tests de caractérisation
-- [ ] 4. Refactoring SRP, puis Open/Closed, puis DRY et constantes
+- [x] 3. Version 1 legacy et tests de caractérisation
+- [x] 4. Refactoring SRP, puis Open/Closed, puis DRY et constantes
 - [ ] 5. Persistance, CLI, tests complets
 - [ ] 6. Support de présentation, démo, extension Scala
 
