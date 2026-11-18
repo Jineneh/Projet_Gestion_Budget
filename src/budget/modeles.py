@@ -56,6 +56,15 @@ def lire_date(texte: str) -> date:
         raise DateInvalideError(message) from erreur
 
 
+def lire_mois(texte: str) -> str:
+    """Valide un mois AAAA-MM et le renvoie normalisé (« 2026-1 » devient « 2026-01 »)."""
+    try:
+        return datetime.strptime(texte.strip(), FORMAT_MOIS).strftime(FORMAT_MOIS)
+    except (ValueError, AttributeError) as erreur:
+        message = f"Mois invalide : {texte!r} (format attendu AAAA-MM)"
+        raise DateInvalideError(message) from erreur
+
+
 def mois_de(jour: date) -> str:
     """Renvoie le mois d'une date au format AAAA-MM."""
     return jour.strftime(FORMAT_MOIS)
