@@ -31,7 +31,10 @@ def valider_montant(montant: object) -> Decimal:
         raise MontantInvalideError(f"Montant non numérique : {montant!r}") from erreur
     if not valeur.is_finite():
         raise MontantInvalideError(f"Montant non numérique : {montant!r}")
-    arrondi = valeur.quantize(PRECISION_MONTANT)
+    try:
+        arrondi = valeur.quantize(PRECISION_MONTANT)
+    except InvalidOperation as erreur:  # nombre trop grand pour être arrondi au centime
+        raise MontantInvalideError(f"Montant hors limites : {montant!r}") from erreur
     if arrondi <= 0:
         raise MontantInvalideError(f"Le montant doit être strictement positif : {montant!r}")
     return arrondi

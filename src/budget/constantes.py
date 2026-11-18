@@ -19,3 +19,7 @@ SEUIL_DEPASSEMENT_POURCENT = Decimal("100")
 # Fichiers de données
 FICHIER_DONNEES_PAR_DEFAUT = "budget.json"
 ENCODAGE_FICHIERS = "utf-8"
+
+# Colonnes des fichiers CSV
+COLONNES_TRANSACTIONS = ("date", "type", "montant", "categorie", "description")
+COLONNES_PLAFONDS = ("categorie", "plafond")
