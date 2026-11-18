@@ -147,3 +147,8 @@ def test_pourcentage_consomme():
 
 def test_representation_lisible_du_budget():
     assert repr(Budget("Loisirs", 100)) == "Budget('Loisirs', 100.00)"
+
+
+def test_montant_trop_grand_pour_etre_arrondi_est_refuse():
+    with pytest.raises(MontantInvalideError):
+        valider_montant("1e30")

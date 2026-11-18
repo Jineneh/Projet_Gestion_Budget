@@ -1,0 +1,114 @@
+{
+  "transactions": [
+    {
+      "date": "2026-10-01",
+      "type": "revenu",
+      "montant": "2200.00",
+      "categorie": "Salaire",
+      "description": "Salaire octobre"
+    },
+    {
+      "date": "2026-10-02",
+      "type": "depense",
+      "montant": "650.00",
+      "categorie": "Logement",
+      "description": "Loyer"
+    },
+    {
+      "date": "2026-10-03",
+      "type": "depense",
+      "montant": "48.30",
+      "categorie": "Alimentation",
+      "description": "Courses supermarché"
+    },
+    {
+      "date": "2026-10-05",
+      "type": "depense",
+      "montant": "12.50",
+      "categorie": "Transport",
+      "description": "Ticket de métro"
+    },
+    {
+      "date": "2026-10-07",
+      "type": "depense",
+      "montant": "63.20",
+      "categorie": "Alimentation",
+      "description": "Marché et boulangerie"
+    },
+    {
+      "date": "2026-10-09",
+      "type": "depense",
+      "montant": "35.00",
+      "categorie": "Loisirs",
+      "description": "Cinéma et restaurant"
+    },
+    {
+      "date": "2026-10-11",
+      "type": "revenu",
+      "montant": "120.00",
+      "categorie": "Freelance",
+      "description": "Mission ponctuelle"
+    },
+    {
+      "date": "2026-10-14",
+      "type": "depense",
+      "montant": "75.00",
+      "categorie": "Transport",
+      "description": "Abonnement mensuel"
+    },
+    {
+      "date": "2026-10-16",
+      "type": "depense",
+      "montant": "54.80",
+      "categorie": "Alimentation",
+      "description": "Courses supermarché"
+    },
+    {
+      "date": "2026-10-18",
+      "type": "depense",
+      "montant": "29.99",
+      "categorie": "Loisirs",
+      "description": "Abonnement streaming"
+    },
+    {
+      "date": "2026-10-21",
+      "type": "depense",
+      "montant": "81.40",
+      "categorie": "Alimentation",
+      "description": "Courses supermarché"
+    },
+    {
+      "date": "2026-10-23",
+      "type": "depense",
+      "montant": "22.00",
+      "categorie": "Santé",
+      "description": "Pharmacie"
+    },
+    {
+      "date": "2026-10-26",
+      "type": "depense",
+      "montant": "67.90",
+      "categorie": "Alimentation",
+      "description": "Courses supermarché"
+    },
+    {
+      "date": "2026-10-28",
+      "type": "depense",
+      "montant": "40.00",
+      "categorie": "Loisirs",
+      "description": "Sortie entre amis"
+    },
+    {
+      "date": "2026-10-30",
+      "type": "depense",
+      "montant": "19.90",
+      "categorie": "Transport",
+      "description": "Covoiturage"
+    }
+  ],
+  "plafonds": {
+    "Alimentation": "350.00",
+    "Loisirs": "100.00",
+    "Transport": "150.00"
+  }
+}
