@@ -18,6 +18,7 @@ from budget.modeles import (
     Transaction,
     TypeTransaction,
     lire_date,
+    lire_mois,
     somme_montants,
     valider_montant,
 )
@@ -152,3 +153,14 @@ def test_representation_lisible_du_budget():
 def test_montant_trop_grand_pour_etre_arrondi_est_refuse():
     with pytest.raises(MontantInvalideError):
         valider_montant("1e30")
+
+
+@pytest.mark.parametrize(("texte", "attendu"), [("2026-10", "2026-10"), (" 2026-1 ", "2026-01")])
+def test_lire_mois_valide_et_normalise(texte, attendu):
+    assert lire_mois(texte) == attendu
+
+
+@pytest.mark.parametrize("texte", ["2026-13", "octobre", "", "2026-10-05", None])
+def test_lire_mois_refuse_un_mois_invalide(texte):
+    with pytest.raises(DateInvalideError):
+        lire_mois(texte)
