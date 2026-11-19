@@ -9,7 +9,7 @@ from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
 from enum import Enum
 
-from budget.constantes import FORMAT_DATE, FORMAT_MOIS, PRECISION_MONTANT
+from budget.constantes import BASE_POURCENTAGE, FORMAT_DATE, FORMAT_MOIS, PRECISION_MONTANT
 from budget.erreurs import (
     CategorieInvalideError,
     DateInvalideError,
@@ -148,7 +148,7 @@ class Budget:
 
     def pourcentage_consomme(self, depenses: Decimal) -> Decimal:
         """Part du plafond déjà consommée, en pourcentage."""
-        return depenses * 100 / self._plafond
+        return depenses * BASE_POURCENTAGE / self._plafond
 
     def __repr__(self) -> str:
         return f"Budget({self._categorie!r}, {self._plafond})"
