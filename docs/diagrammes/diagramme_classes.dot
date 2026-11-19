@@ -1,0 +1,47 @@
+digraph UML {
+graph [rankdir=TB, nodesep=0.55, ranksep=0.75, fontname="Helvetica", labelloc=t, label=<<B>Gestion de budget personnel : diagramme de classes</B>>, fontsize=18, pad=0.3];
+node [shape=plain, fontname="Helvetica", fontsize=10];
+edge [fontname="Helvetica", fontsize=9];
+CLI [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>CLI</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">- application<BR/>- formateur</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ executer()<BR/>+ charger_au_demarrage()</TD></TR></TABLE>>];
+Application [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>Application</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">- depot<BR/>- journal<BR/>- suivi</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ ajouter_transaction()<BR/>+ definir_plafond()<BR/>+ lister_transactions()<BR/>+ generer_rapport()<BR/>+ alertes()<BR/>+ sauvegarder() / charger()<BR/>+ importer(source)</TD></TR></TABLE>>];
+Journal [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>Journal</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">- transactions</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ ajouter()<BR/>+ filtrer()<BR/>+ depenses_du_mois()<BR/>+ revenus_du_mois()</TD></TR></TABLE>>];
+Transaction [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><FONT POINT-SIZE="9">«dataclass frozen»</FONT><BR/><B>Transaction</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">montant: Decimal<BR/>jour: date<BR/>categorie: str<BR/>type<BR/>description: str</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ montant_signe<BR/>+ mois<BR/>+ est_depense</TD></TR></TABLE>>];
+TypeTransaction [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><FONT POINT-SIZE="9">«enumeration»</FONT><BR/><B>TypeTransaction</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">REVENU<BR/>DEPENSE</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ depuis_texte()</TD></TR></TABLE>>];
+Budget [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>Budget</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">- categorie<BR/>- plafond: Decimal</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ pourcentage_consomme()</TD></TR></TABLE>>];
+SuiviBudget [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>SuiviBudget</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">- journal<BR/>- budgets<BR/>- politiques</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ definir_budget()<BR/>+ niveau()<BR/>+ alertes()<BR/>+ depenses_categorie()</TD></TR></TABLE>>];
+PolitiqueAlerte [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><FONT POINT-SIZE="9">«abstract»</FONT><BR/><B><I>PolitiqueAlerte</I></B></TD></TR><HR/><TR><TD ALIGN="LEFT"> </TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ evaluer(pourcentage)</TD></TR></TABLE>>];
+PolitiqueSeuil [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>PolitiqueSeuil</B></TD></TR><HR/><TR><TD ALIGN="LEFT"> </TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ evaluer()  # ≥ 80 %</TD></TR></TABLE>>];
+PolitiqueDepassement [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>PolitiqueDepassement</B></TD></TR><HR/><TR><TD ALIGN="LEFT"> </TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ evaluer()  # &gt; 100 %</TD></TR></TABLE>>];
+NiveauAlerte [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><FONT POINT-SIZE="9">«enumeration»</FONT><BR/><B>NiveauAlerte</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">AUCUNE_DEPENSE<BR/>OK<BR/>ATTENTION<BR/>DEPASSEMENT</TD></TR><HR/><TR><TD ALIGN="LEFT"> </TD></TR></TABLE>>];
+RapportMensuel [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><FONT POINT-SIZE="9">«dataclass frozen»</FONT><BR/><B>RapportMensuel</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">mois<BR/>total_revenus<BR/>total_depenses<BR/>depenses_par_categorie<BR/>alertes</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ solde<BR/>+ calculer(journal, suivi, mois)</TD></TR></TABLE>>];
+FormateurRapportTexte [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>FormateurRapportTexte</B></TD></TR><HR/><TR><TD ALIGN="LEFT"> </TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ formater(rapport): str</TD></TR></TABLE>>];
+Depot [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><FONT POINT-SIZE="9">«abstract»</FONT><BR/><B><I>Depot</I></B></TD></TR><HR/><TR><TD ALIGN="LEFT"> </TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ charger(): ResultatChargement<BR/>+ sauvegarder(transactions, budgets)</TD></TR></TABLE>>];
+DepotJson [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>DepotJson</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">- chemin</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ charger()<BR/>+ sauvegarder()</TD></TR></TABLE>>];
+DepotCsv [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><B>DepotCsv</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">- chemin_transactions<BR/>- chemin_plafonds</TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">+ charger()<BR/>+ sauvegarder()</TD></TR></TABLE>>];
+ResultatChargement [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><FONT POINT-SIZE="9">«dataclass frozen»</FONT><BR/><B>ResultatChargement</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">transactions<BR/>budgets<BR/>erreurs</TD></TR><HR/><TR><TD ALIGN="LEFT"> </TD></TR></TABLE>>];
+BudgetError [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD ALIGN="CENTER" BGCOLOR="#E8EEF7"><FONT POINT-SIZE="9">«exception»</FONT><BR/><B>BudgetError</B></TD></TR><HR/><TR><TD ALIGN="LEFT"> </TD></TR><HR/><TR><TD ALIGN="LEFT"> </TD></TR></TABLE>>];
+Erreurs [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4"><TR><TD BGCOLOR="#E8EEF7"><B>Erreurs métier</B></TD></TR><HR/><TR><TD ALIGN="LEFT" BALIGN="LEFT">MontantInvalideError<BR/>PlafondInvalideError<BR/>CategorieInvalideError<BR/>DateInvalideError<BR/>TypeTransactionInvalideError<BR/>FichierDonneesError</TD></TR></TABLE>>];
+CLI -> Application [arrowhead=vee, label="utilise"];
+CLI -> FormateurRapportTexte [arrowhead=vee, label="utilise"];
+CLI -> DepotCsv [style=dashed, arrowhead=vee, label="crée (import)"];
+Application -> Depot [arrowhead=vee, label="dépôt injecté"];
+Application -> Journal [dir=both, arrowtail=diamond, arrowhead=vee];
+Application -> SuiviBudget [dir=both, arrowtail=diamond, arrowhead=vee];
+Application -> RapportMensuel [style=dashed, arrowhead=vee, label="produit"];
+SuiviBudget -> Journal [arrowhead=vee, label="lit"];
+SuiviBudget -> Budget [dir=both, arrowtail=odiamond, arrowhead=vee, label="0..*"];
+SuiviBudget -> PolitiqueAlerte [dir=both, arrowtail=diamond, arrowhead=vee, label="1..*"];
+Journal -> Transaction [dir=both, arrowtail=odiamond, arrowhead=vee, label="0..*"];
+Transaction -> TypeTransaction [arrowhead=vee];
+PolitiqueSeuil -> PolitiqueAlerte [arrowhead=empty];
+PolitiqueDepassement -> PolitiqueAlerte [arrowhead=empty];
+PolitiqueAlerte -> NiveauAlerte [style=dashed, arrowhead=vee];
+RapportMensuel -> NiveauAlerte [style=dashed, arrowhead=vee];
+FormateurRapportTexte -> RapportMensuel [style=dashed, arrowhead=vee, label="met en forme"];
+DepotJson -> Depot [arrowhead=empty];
+DepotCsv -> Depot [arrowhead=empty];
+Depot -> ResultatChargement [style=dashed, arrowhead=vee, label="renvoie"];
+Erreurs -> BudgetError [arrowhead=empty];
+{rank=same; PolitiqueSeuil; PolitiqueDepassement}
+{rank=same; DepotJson; DepotCsv}
+}

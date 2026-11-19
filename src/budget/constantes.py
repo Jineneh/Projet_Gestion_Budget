@@ -11,6 +11,7 @@ FORMAT_MOIS = "%Y-%m"
 # Montants
 DEVISE = "EUR"
 PRECISION_MONTANT = Decimal("0.01")
+BASE_POURCENTAGE = 100
 
 # Seuils d'alerte budgétaire, en pourcentage du plafond
 SEUIL_ALERTE_POURCENT = Decimal("80")
