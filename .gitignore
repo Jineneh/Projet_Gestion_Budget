@@ -21,3 +21,5 @@ data/ma_*.csv
 scala_extension/target/
 scala_extension/.bsp/
 scala_extension/.scala-build/
+# Fichier de données par défaut de l'application
+budget.json
