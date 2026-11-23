@@ -1,8 +1,11 @@
 # Gestion de budget personnel
 
-Application en ligne de commande (Python 3.11+) pour suivre ses revenus et ses dépenses, fixer un
-plafond mensuel par catégorie, être alerté avant le dépassement et obtenir un rapport mensuel.
+Application (Python 3.11+) pour suivre ses revenus et ses dépenses, fixer un plafond mensuel par
+catégorie, être alerté avant le dépassement et obtenir un rapport mensuel. Elle s'utilise en ligne
+de commande ou depuis une interface web.
 Projet du cours *Programmation épurée* (Master 2) : programmation orientée objet et Clean Code.
+
+**Interface web en ligne : https://gestion-budget-project.streamlit.app/**
 
 ## Fonctionnalités
 
@@ -10,11 +13,13 @@ Projet du cours *Programmation épurée* (Master 2) : programmation orientée ob
 - Définir un plafond mensuel par catégorie, avec alertes « Attention » à 80 % et « Dépassement » au-delà de 100 %
 - Rapport mensuel : revenus, dépenses, solde, détail par catégorie, alertes
 - Sauvegarde et chargement (JSON) ; import de CSV qui rejette les lignes invalides avec un message clair
+- Deux interfaces au-dessus de la même logique métier : ligne de commande et interface web
 
 ## Prérequis
 
-Python 3.11 ou plus récent. L'application n'utilise que la bibliothèque standard ; `requirements.txt`
-ne contient que les outils de développement (pytest, pytest-cov, ruff).
+Python 3.11 ou plus récent. L'application en ligne de commande n'utilise que la bibliothèque standard ;
+`requirements.txt` ne contient que les outils de développement (pytest, pytest-cov, ruff).
+L'interface web ajoute une dépendance, Streamlit (`web/requirements.txt`).
 
 ## Installation
 
@@ -29,7 +34,7 @@ pip install -e .
 
 Sous PowerShell, si l'activation est refusée : `Set-ExecutionPolicy -Scope Process Bypass`.
 
-## Exécution
+## Exécution en ligne de commande
 
 ```bash
 python -m budget                                   # données dans budget.json
@@ -50,14 +55,41 @@ sauvegarder, charger. Un fichier de données illisible n'est jamais écrasé.
    catégorie vide).
 4. Choisir `1` avec un montant `abc` : un message d'erreur s'affiche et le programme continue.
 
+## Interface web
+
+Disponible en ligne sur https://gestion-budget-project.streamlit.app/ (Streamlit). Aucune installation
+n'est nécessaire : ouvrir le lien, puis cliquer sur « Charger les données d'exemple ».
+
+Pages : tableau de bord (reste à dépenser, plafonds contre dépenses, répartition), transactions
+(saisie validée et suivi filtrable), plafonds (suivi et simulateur d'alertes), rapport mensuel,
+données (import CSV, sauvegarde JSON), architecture (diagramme UML, avant / après) et guide en six étapes.
+
+Pour la lancer en local :
+
+```bash
+pip install -r web/requirements.txt
+python -m streamlit run web/app.py          # ouvre http://localhost:8501
+```
+
+Points à connaître :
+
+- L'interface réutilise l'`Application` du dossier `src/` sans la modifier : la ligne de commande et
+  le web partagent exactement la même logique métier.
+- Les données de chaque visiteur sont gardées en mémoire, séparées de celles des autres, et
+  disparaissent à la fermeture. Le bouton « Télécharger ma sauvegarde (.json) » permet de les conserver.
+- Une application gratuite s'endort après quelques jours sans visite : un clic sur « Wake up » la réveille.
+- Le thème est défini dans `.streamlit/config.toml`. Les médias de la page Guide (vidéo, captures)
+  se déposent dans `web/assets/`.
+
 ## Tests et qualité
 
 ```bash
 python -m pytest --cov=budget        # 187 tests, couverture 100 %
+python -m pytest web                 # 15 tests de l'interface web (simulateur Streamlit)
 python -m ruff check src tests       # style et complexité (maximum 8 par fonction)
 ```
 
-Une intégration continue (`.github/workflows/tests.yml`) lance ces deux commandes à chaque push.
+Une intégration continue (`.github/workflows/tests.yml`) lance les tests du projet et ruff à chaque push.
 
 ## Architecture
 
@@ -73,10 +105,16 @@ src/budget/
 ├── cli.py           interface en ligne de commande
 ├── constantes.py    seuils, formats, colonnes
 └── erreurs.py       exceptions métier
+web/
+├── app.py           point d'entrée Streamlit et navigation
+├── vues/            une page par module (tableau de bord, transactions, plafonds, ...)
+├── composants.py    panneaux, donuts, barres et tableaux (HTML et SVG)
+├── etat.py          une Application par visiteur
+└── style.py         thème rose et mauve
 ```
 
-La CLI appelle `Application`, qui orchestre le métier et ne connaît que l'abstraction `Depot`.
-Diagramme de classes : [docs/diagrammes/diagramme_classes.png](docs/diagrammes/diagramme_classes.png).
+La CLI et l'interface web appellent `Application`, qui orchestre le métier et ne connaît que
+l'abstraction `Depot`. Diagramme de classes : [docs/diagrammes/diagramme_classes.png](docs/diagrammes/diagramme_classes.png).
 
 ## Choix techniques essentiels
 
@@ -84,6 +122,7 @@ Diagramme de classes : [docs/diagrammes/diagramme_classes.png](docs/diagrammes/d
 - **Objets toujours valides** : `Transaction` et `Budget` valident leurs données à la construction.
 - **Une responsabilité par classe** : calcul, mise en forme, stockage et dialogue sont séparés.
 - **Héritage limité à deux hiérarchies** (`PolitiqueAlerte`, `Depot`), le reste est de la composition.
+- **Une logique, deux interfaces** : la CLI et le web ne contiennent aucune règle métier.
 - **Entrée et sortie injectées** dans la CLI : l'interface se teste sans clavier ni écran.
 - **Version 1 conservée** dans `legacy/` (tag Git `avant-refactoring`) pour les exemples « avant / après ».
 
@@ -95,6 +134,9 @@ Diagramme de classes : [docs/diagrammes/diagramme_classes.png](docs/diagrammes/d
 - [Organisation Git](docs/workflow_git.md)
 
 ## Équipe
+
+Jinene Hamrouni et Myriam Aoun. La répartition des tâches est détaillée dans
+[docs/conception.md](docs/conception.md#8-répartition-du-travail).
 
 Jinene Hamrouni et Myriam Aoun. La répartition des tâches est détaillée dans
 [docs/conception.md](docs/conception.md#8-répartition-du-travail).
