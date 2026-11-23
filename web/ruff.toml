@@ -1,0 +1,5 @@
+extend = "../pyproject.toml"
+line-length = 130
+
+[lint.per-file-ignores]
+"style.py" = ["E501"]
